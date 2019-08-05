@@ -3,6 +3,7 @@
 """
 from flask import request
 
+from app.libs.error_code import ClientTypeError
 from app.libs.enums import ClientTypeEnum
 from app.libs.redprint import Redprint
 from app.models.user import User
@@ -20,10 +21,12 @@ def create_client():
             ClientTypeEnum.USER_EMAIL: __register_user_by_email
         }
         promise[form.type.data]()
+    else:
+        raise ClientTypeError()
     return 'success'
 
 
 def __register_user_by_email():
-    form = UserEmailForm()
+    form = UserEmailForm(data=request.json)
     if form.validate():
         User.register_by_email(form.nickname.data, form.account.data, form.secret.data)

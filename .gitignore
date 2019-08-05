@@ -1,0 +1,6 @@
+
+*.xml
+
+*.iml
+
+app/.DS_Store
