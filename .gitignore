@@ -4,3 +4,5 @@
 *.iml
 
 app/.DS_Store
+
+*.xml
