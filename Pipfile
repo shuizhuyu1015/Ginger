@@ -13,6 +13,7 @@ flask-sqlalchemy = "*"
 cymysql = "*"
 flask-login = "*"
 flask-mail = "*"
+flask-httpauth = {index = "https://pypi.douban.com/simple",version = "*"}
 
 [requires]
 python_version = "3.7"

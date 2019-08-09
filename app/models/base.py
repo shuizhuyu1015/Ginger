@@ -1,8 +1,7 @@
 """
  Created by 七月 on 2018/5/11.
 """
-
-__author__ = '七月'
+from app.libs.error_code import NotFound
 
 from datetime import datetime
 
@@ -28,6 +27,19 @@ class Query(BaseQuery):
             kwargs['status'] = 1
         return super(Query, self).filter_by(**kwargs)
 
+    # 重新404方法，以在404的时候返回json格式结果
+    def get_or_404(self, ident, description=None):
+        rv = self.get(ident)
+        if not rv:
+            raise NotFound()
+        return rv
+
+    def first_or_404(self, description=None):
+        rv = self.first()
+        if not rv:
+            raise NotFound()
+        return rv
+
 
 db = SQLAlchemy(query_class=Query)
 
@@ -39,6 +51,10 @@ class Base(db.Model):
 
     def __init__(self):
         self.create_time = int(datetime.now().timestamp())
+
+    # json序列化模型需要实现的方法，同时还要实现keys方法
+    def __getitem__(self, item):
+        return getattr(self, item)
 
     @property
     def create_datetime(self):

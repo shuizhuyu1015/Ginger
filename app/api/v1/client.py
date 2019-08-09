@@ -13,7 +13,6 @@ api = Redprint('client')
 
 @api.route('/register', methods=['POST'])
 def create_client():
-    1/0
     form = ClientForm().validate_for_api()
     # 以下注释只能抛出ClientTypeError异常，不能抛出其他异常提示，
     # 所以自定义一个form基类BaseForm，自定义校验方法validate_for_api

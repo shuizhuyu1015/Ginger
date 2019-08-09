@@ -7,10 +7,10 @@ from wtforms import ValidationError
 
 from app.libs.enums import ClientTypeEnum
 from app.models.user import User
-from app.validators.base import BaseForm as Form
+from app.validators.base import BaseForm
 
 
-class ClientForm(Form):
+class ClientForm(BaseForm):
     account = StringField(validators=[DataRequired(message='不允许为空'), length(min=5, max=32)])
     secret = StringField()
     type = IntegerField(validators=[DataRequired()])

@@ -20,5 +20,6 @@ class Redprint:
             url_prefix = '/' + self.name
 
         for f, rule, options in self.mound:
-            endpoint = options.pop("endpoint", f.__name__)
+            # 红图名 + 默认的endpoint名，方便scope模块中去判断访问权限
+            endpoint = self.name + '+' + options.pop("endpoint", f.__name__)
             bp.add_url_rule(url_prefix + rule, endpoint, f, **options)

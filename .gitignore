@@ -6,3 +6,11 @@
 app/.DS_Store
 
 *.xml
+
+*.xml
+
+*.xml
+
+.idea/workspace.xml
+
+Pipfile.lock
